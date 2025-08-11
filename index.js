@@ -1,32 +1,17 @@
-console.log('test something');
+const express = require('express');
+const app = express();
+const port = 3000;
 
-// axios 2.0.0
-const axios = require('axios');
+const wishlistItems = [
+  { id: 1, name: 'A new bike', sku: 'BIKE-001', description: 'A shiny new mountain bike.' },
+  { id: 2, name: 'A good book', sku: 'BOOK-001', description: 'A captivating novel.' },
+  { id: 3, name: 'A trip to the mountains', sku: 'TRIP-001', description: 'A weekend getaway to the mountains.' }
+];
 
-// Updated way to set default headers in axios 2.0.0
-axios.defaults.headers.common = {
-  'Authorization': 'Bearer token'
-};
+app.get('/wishlist', (req, res) => {
+  res.json(wishlistItems);
+});
 
-axios.get('/user')
-  .then(response => {
-    // Response handling remains similar in 2.0.0
-    console.log(response.data);
-  })
-  .catch(error => {
-    // Updated error handling for axios 2.0.0
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // Server responded with status code outside 2xx range
-        console.error('Response error:', error.response.data);
-      } else if (error.request) {
-        // Request made but no response received
-        console.error('Request error:', error.request);
-      } else {
-        // Error setting up request
-        console.error('Error:', error.message);
-      }
-    } else {
-      console.error('Non-Axios error:', error);
-    }
-  });
+app.listen(port, () => {
+  console.log(`Wishlist server listening at http://localhost:${port}`);
+});
