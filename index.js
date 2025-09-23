@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 8080;
 
 const wishlistItems = [
   { id: 1, name: 'A new bike', sku: 'BIKE-001', description: 'A shiny new mountain bike.' },
