@@ -12,6 +12,17 @@ app.get('/wishlist', (req, res) => {
   res.json(wishlistItems);
 });
 
+app.get('/wishlist/search', (req, res) => {
+  const filter = req.query.filter;
+
+  try {
+    const results = wishlistItems.filter(item => eval(filter));
+    res.json(results);
+  } catch (err) {
+    res.status(400).json({ error: 'Invalid filter expression' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Wishlist server listening at http://localhost:${port}`);
 });
